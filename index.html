@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+     <title>index</title>
+</head>
+<body id="body">
+
+<button id="request">Request</button>
+
+
+<script>
+var request_button = document.getElementById("request")
+var body = document.getElementById("body")
+request_button.addEventListener("click", function () {
+	var limit = 0
+	var xml = new XMLHttpRequest()
+	xml.open("GET","/get")
+	xml.onreadystatechange = () => {
+    if (limit==0) {
+    	
+    var obj = JSON.parse(xml.responseText)
+    var new_p = document.createElement("p")
+    var text = document.createTextNode(obj.alert)
+    new_p.appendChild(text)
+    body.appendChild(new_p)
+
+    limit=1;return false;}
+	}
+	xml.send()
+})
+
+
+</script>
+</body>
+</html>
